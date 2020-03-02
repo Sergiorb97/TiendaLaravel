@@ -1,0 +1,1 @@
+<p>Tu nueva contraseña es <span style="color:red">{{$contra}}</span></p>

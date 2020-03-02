@@ -1,0 +1,39 @@
+/* body {
+    overflow-x: hidden;
+    padding-top: 55px;
+}
+
+.sidebar.collapse.show,
+.sidebar.collapse.show + .col {
+    transition: .35s ease-in-out;
+    left: 0;
+}
+
+.sidebar.collapse ,
+.sidebar.collapsing,
+.sidebar.collapsing + .col {
+    transition: .35s ease-in-out;
+    z-index: 1050;
+    left: -30%;
+    height: auto !important;
+} */
+#visible {
+    transition: .50s ease-in-out;
+    left: -30%;
+}
+
+#izq {
+    transition: .50s ease-in-out;
+    left: 5%;
+}
+
+#oculto {
+    transition: .50s ease-in-out;
+    left: 0%;
+    margin-right: 0%;
+}
+
+#der {
+    transition: .50s ease-in-out;
+    left: -12.5%;
+}
