@@ -26,9 +26,9 @@ class ctrlCarrito extends Controller
                     'stock' => $producto->stock
                 )
             ));
-            return back()->with('añadido','Producto añadido correctamente');
+            return back()->with('success','Producto añadido correctamente');
         } else {
-            return back()->with('error','Error al añadir el pedido, producto agotado');
+            return back()->with('fail','Error al añadir el pedido, producto agotado');
         }
 
 
@@ -65,7 +65,7 @@ class ctrlCarrito extends Controller
             $carrito = Cart::update($id_producto, array('quantity' => $cantidad));
             return back();
         }else{
-            return back()->with('error','Cantidad de productos máxima alcanzada');
+            return back()->with('fail','Cantidad de productos máxima alcanzada');
         }
     }
 }

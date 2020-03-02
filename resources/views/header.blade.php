@@ -30,7 +30,7 @@
           </a>
           <div class="float-right">
             @if(session()->has('user'))
-            <span class="text-white">Bienvenido {{session('usuarioid')}}</span>
+            <span class="text-white float-left mr-5 mt-2">Bienvenido {{session('nombre')}}</span>
             <div class="dropdown float-left mr-5 pr-5">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Perfil
@@ -56,6 +56,21 @@
       </div>
     </div>
   </header>
+
+  @if(session('success'))
+  <div style="z-index:1500;" class="position-absolute alert alert-success">{{ session('success') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  @endif
+  @if(session('fail'))
+  <div style="z-index:1500;" class="position-absolute alert alert-danger">{{ session('fail') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  @endif
 
 
   @if($errors->has('usuarioLogin') || $errors->has('passLogin'))
@@ -181,7 +196,7 @@
                     <input type="text" name="telefono" class="form-control ml-3" placeholder="Teléfono" value="{{ old('telefono') }}">
                   </div>
                 </div>
-                
+
                 <div class="row mb-3">
                   <div clas="col">
                     <input type="text" name="domicilio" class="form-control ml-2" placeholder="Domicilio" value="{{ old('domicilio') }}">
@@ -217,27 +232,27 @@
 
   <div class="modal fade" id="contraOlvidada" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                Contraseña olvidada
-            </div>
-            <div class="modal-body">
-                <div>
-                    <h5>Inserta tu nombre de usuario, te enviaremos un correo de confirmación al correo asociado a ese usuario.</h5>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <form method="POST" action="{{ route('olvidada') }}">
-                                @csrf
-                                <p class="text-center"><input type="text" name="userRestablecer" placeholder="Usuario"></p>
-                                <a class="btn btn-secondary ml-5" href="#" data-dismiss="modal">Volver</a>
-                                <input type="submit" style="color:white;cursor:pointer;" class="btn btn-success float-right mr-5" value="Aceptar">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          Contraseña olvidada
         </div>
+        <div class="modal-body">
+          <div>
+            <h5>Inserta tu nombre de usuario, te enviaremos un correo de confirmación al correo asociado a ese usuario.</h5>
+            <div class="row mt-3">
+              <div class="col">
+                <form method="POST" action="{{ route('olvidada') }}">
+                  @csrf
+                  <p class="text-center"><input type="text" name="userRestablecer" placeholder="Usuario"></p>
+                  <a class="btn btn-secondary ml-5" href="#" data-dismiss="modal">Volver</a>
+                  <input type="submit" style="color:white;cursor:pointer;" class="btn btn-success float-right mr-5" value="Aceptar">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
     </div>
-</div>
+  </div>

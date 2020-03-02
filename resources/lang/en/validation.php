@@ -130,12 +130,14 @@ return [
     */
 
     'custom' => [
+        //LOGIN
         'usuarioLogin' => [
             'required' => 'Debes introducir un usuario',
         ],
         'passLogin' => [
             'required' => 'Debes introducir una contraseña',
         ],
+        //REGISTRAR
         'nombre' => [
             'required' => 'Debes introducir un nombre',
             'alpha' => 'El nombre solo puede tener letras',
@@ -161,6 +163,31 @@ return [
             'email' => 'Debes insertar un formato de email válido'
         ],
         'tarjeta' => [
+            'required' => 'Debes introducir un número de tarjeta',
+            'numberic' => 'Este campo solo puede contener números'
+        ],
+        //MODIFICAR
+        'usuarioMod' => [
+            'required' => 'Debes introducir un nombre de usuario',
+            'alpha_num' => 'Solo puede contener letras y números',
+        ],
+        'nombreMod' => [
+            'required' => 'Debes introducir un nombre',
+            'alpha' => 'El nombre solo puede tener letras',
+        ],
+        'apellidosMod' => [
+            'required' => 'Debes introducir los apellidos',
+            'alpha' => 'Los apellidos solo pueden tener letras',
+        ],
+        'correoMod' => [
+            'required' => 'Debes introducir un correo',
+            'email' => 'Debes insertar un formato de email válido'
+        ],
+        'dniMod' => [
+            'required' => 'Debes introducir un DNI/CIF',
+            'alpha_num' => 'Solo puede contener letras y números',
+        ],
+        'tarjetaMod' => [
             'required' => 'Debes introducir un número de tarjeta',
             'numberic' => 'Este campo solo puede contener números'
         ],

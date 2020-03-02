@@ -9,16 +9,33 @@ use Illuminate\Support\Facades\Hash;
 class ctrlUsuario extends Controller
 {
     public function modificar(Request $request){
+
+        $this->validate($request, [
+            'usuarioMod' => 'required|alpha_num',
+            'nombreMod' => 'required|alpha',
+            'apellidosMod' => 'required|alpha',
+            'correoMod' => 'required|email',
+            'dniMod' => 'required|alpha_num',
+            'tarjetaMod' => 'required|numeric'
+        ]);
+        
+        if($request->get('usuarioMod') != session('user')){
+            $countUsers = Usuarios::where('user',$request->get('usuarioMod'))->count();
+            if($countUsers != 0){
+                return back()->with('existeMod','Este nombre de usuario ya existe');
+            }
+        }
+
         Usuarios::where('usuario_id',$request->get('idusuario'))->update([
-                'user' => $request->get('usuario'),
-                'nombre' => $request->get('nombre'),
-                'apellidos' => $request->get('apellidos'),
-                'correo' => $request->get('correo'),
-                'dni' => $request->get('dni'),
-                'telefono' => $request->get('telefono'),
-                'tarjeta' => $request->get('tarjeta'),
-                'tipo' => $request->get('tipo'),
-                'domicilio' => $request->get('domicilio')
+                'user' => $request->get('usuarioMod'),
+                'nombre' => $request->get('nombreMod'),
+                'apellidos' => $request->get('apellidosMod'),
+                'correo' => $request->get('correoMod'),
+                'dni' => $request->get('dniMod'),
+                'telefono' => $request->get('telefonoMod'),
+                'tarjeta' => $request->get('tarjetaMod'),
+                'tipo' => $request->get('tipoMod'),
+                'domicilio' => $request->get('domicilioMod')
         ]);
         return redirect()->route('inicio');
     }
@@ -27,9 +44,9 @@ class ctrlUsuario extends Controller
         if($request->get('pass') == $request->get('passConfirm')){
             $contra = Hash::make($request->get('pass'));
             Usuarios::where('usuario_id',$request->get('idusuario'))->update(['pass' => $contra]);
-            return redirect()->route('inicio');
+            return redirect()->route('inicio')->with('success','¡Contraseña cambiada con exito!');
         }else{
-            return back();
+            return back()->with('fail','Ha surgido un error, asegurate de insertar las contraseñas correctamente');
         }
     }
 
@@ -56,7 +73,7 @@ class ctrlUsuario extends Controller
                 </div>
             </div>
             </body>');
-            return redirect()->route('inicio');
+            return redirect()->route('inicio')->with('success','¡Se ha enviado un correo para que modifiques tu contraseña!');
     }
 
     public function restablecer($usuario_id){
@@ -69,6 +86,6 @@ class ctrlUsuario extends Controller
     public function eliminar(){
         Usuarios::where('usuario_id',session('usuarioid'))->delete();
         session()->flush();
-        return redirect()->route('inicio');
+        return redirect()->route('inicio')->with('success','¡Se ha eliminado el usuario con exito!');
     }
 }

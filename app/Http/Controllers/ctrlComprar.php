@@ -107,13 +107,13 @@ class ctrlComprar extends Controller
                 foreach($productos as $producto){
                     Cart::remove($producto['id']);
                 }
-                return redirect()->route('inicio');
+                return redirect()->route('inicio')->with('success','¡Se ha realizado la compra correctamente, enseguida recibirás un correo con los datos de tu pedido!');
                 // //
             } else {
-                return back()->with('error', 'Error');
+                return back()->with('fail', 'Necesitas tener registrada una tarjeta');
             }
         } else {
-            return back()->with('error', 'Error');
+            return back()->with('fail', 'No existe suficiente stock');
         }
     }
 }

@@ -71,12 +71,12 @@ class ctrlMenu extends Controller
 
     public function cancelarPedido(Request $request){
         Facturas::where('factura_id',$request->get('facturaid'))->delete();
-        return back();
+        return back()->with('success','¡Se ha cancelado el pedido!');
     }
 
     public function cancelarItem(Request $request){
         Items::where('item_id',$request->get('itemid'))->delete();
-        return back();
+        return back()->with('success','¡Se ha cancelado un artículo!');
     }
 
     public function cerrarSesion(){

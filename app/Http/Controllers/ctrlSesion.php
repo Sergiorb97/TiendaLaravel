@@ -30,9 +30,9 @@ class ctrlSesion extends Controller
                 session(['telefono' => $datos->telefono]);
                 session(['tarjeta' => $datos->tarjeta]);
             
-            return back()->with('mensajeCorrecto', 'Sesión iniciada correctamente');
+            return back()->with('success', 'Sesión iniciada correctamente');
         } else {
-            return back()->with('mensajeIncorrecto', 'Credenciales incorrectas');
+            return back()->with('fail', 'Credenciales incorrectas');
         }
     }
 
@@ -69,6 +69,6 @@ class ctrlSesion extends Controller
             'telefono' => $request->get('telefono'),
             'tarjeta' => $request->get('tarjeta')
         ]);
-        return back();
+        return back()->with('success','¡Se ha creado un usuario!');
     }
 }
