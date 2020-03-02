@@ -38,14 +38,22 @@ class ctrlSesion extends Controller
 
     public function comprobarRegistro(Request $request)
     {
+
+
         $this->validate($request, [
-            'usuarioRegistro' => 'required',
-            'passRegistro' => 'required',
+            'usuarioRegistro' => 'required|alpha_num',
+            'passRegistro' => 'required|alpha_num',
             'nombre' => 'required|alpha',
             'apellidos' => 'required|alpha',
-            'correo' => 'required',
-            'dni' => 'required'
+            'correo' => 'required|email',
+            'dni' => 'required|alpha_num',
+            'tarjeta' => 'required|numeric'
         ]);
+
+        $countUsers = Usuarios::where('user',$request->get('usuarioRegistro'))->count();
+        if($countUsers != 0){
+            return back()->with('existe','Este nombre de usuario ya existe');
+        }
 
         $contraseña = $request->get('passRegistro');
         $contraseña = Hash::make($contraseña);
@@ -57,7 +65,9 @@ class ctrlSesion extends Controller
             'correo' => $request->get('correo'),
             'dni' => $request->get('dni'),
             'tipo' => $request->get('tipo'),
-            'domicilio' => $request->get('domicilio')
+            'domicilio' => $request->get('domicilio'),
+            'telefono' => $request->get('telefono'),
+            'tarjeta' => $request->get('tarjeta')
         ]);
         return back();
     }

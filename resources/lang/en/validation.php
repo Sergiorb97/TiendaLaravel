@@ -146,15 +146,23 @@ return [
         ],
         'dni' => [
             'required' => 'Debes introducir un DNI/CIF',
+            'alpha_num' => 'Solo puede contener letras y números',
         ],
         'usuarioRegistro' => [
             'required' => 'Debes introducir un nombre de usuario',
+            'alpha_num' => 'Solo puede contener letras y números',
         ],
         'passRegistro' => [
             'required' => 'Debes introducir una contraseña',
+            'alpha_num' => 'Solo puede contener letras y números',
         ],
         'correo' => [
             'required' => 'Debes introducir un correo',
+            'email' => 'Debes insertar un formato de email válido'
+        ],
+        'tarjeta' => [
+            'required' => 'Debes introducir un número de tarjeta',
+            'numberic' => 'Este campo solo puede contener números'
         ],
     ],
 

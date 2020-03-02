@@ -111,7 +111,7 @@
 
 
 
-  @if($errors->has('nombre') || $errors->has('apellidos') || $errors->has('usuarioRegistro') || $errors->has('passRegistro') || $errors->has('dni') || $errors->has('corre'))
+  @if($errors->has('nombre') || $errors->has('apellidos') || $errors->has('usuarioRegistro') || $errors->has('passRegistro') || $errors->has('dni') || $errors->has('correo') || session('existe') || $errors->has('tarjeta'))
   <script>
     $(window).on('load', function() {
       $('#registro').modal('show');
@@ -159,6 +159,9 @@
                     @if($errors->has('usuarioRegistro'))
                     <div class="alert alert-danger ml-2 my-1">{{ $errors->first('usuarioRegistro') }}</div>
                     @endif
+                    @if(session('existe'))
+                    <div class="alert alert-danger ml-2 my-1">{{ session('existe') }}</div>
+                    @endif
                   </div>
                   <div clas="col">
                     <input type="password" name="passRegistro" class="form-control ml-3" placeholder="Contraseña*">
@@ -167,6 +170,18 @@
                     @endif
                   </div>
                 </div>
+                <div class="row mb-3">
+                  <div clas="col">
+                    <input type="text" name="tarjeta" class="form-control ml-2" placeholder="Tarjeta*" value="{{ old('tarjeta') }}">
+                    @if($errors->has('tarjeta'))
+                    <div class="alert alert-danger ml-2 my-1">{{ $errors->first('tarjeta') }}</div>
+                    @endif
+                  </div>
+                  <div clas="col">
+                    <input type="text" name="telefono" class="form-control ml-3" placeholder="Teléfono" value="{{ old('telefono') }}">
+                  </div>
+                </div>
+                
                 <div class="row mb-3">
                   <div clas="col">
                     <input type="text" name="domicilio" class="form-control ml-2" placeholder="Domicilio" value="{{ old('domicilio') }}">
