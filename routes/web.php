@@ -37,24 +37,24 @@ Route::post('/olvidada','ctrlUsuario@contraOlvidada')->name('olvidada');
 Route::get('/restablecerContra/{usuario_id}','ctrlUsuario@restablecer')->name('restablecerContra');
 
 //Rutas Datos Cuenta/Pedidos
-Route::get('/cuenta/{id_usuario}','ctrlMenu@verCuenta')->name('datosCuenta');
-Route::get('/cuentaModificar/{id_usuario}','ctrlMenu@verCuentaModificar')->name('datosCuentaModificar');
-Route::get('/cuentaCambiarPass/{id_usuario}','ctrlMenu@verCuentaCambiarPass')->name('datosCuentaCambiarPass');
-Route::get('/cuentaEliminar/{id_usuario}','ctrlMenu@verCuentaEliminar')->name('datosCuentaEliminar');
-Route::post('/modificar','ctrlUsuario@modificar')->name('modificarDatos');
-Route::post('/modificarPass','ctrlUsuario@cambiarPass')->name('modificarPass');
-Route::post('/eliminar','ctrlUsuario@eliminar')->name('eliminarUsuario');
-Route::get('/pedidos/{id_usuario}','ctrlMenu@verPedidos')->name('datosPedidos');
-Route::post('/cancelarpedido','ctrlMenu@cancelarPedido')->name('cancelarPedido');
-Route::post('/cancelaritem','ctrlMenu@cancelarItem')->name('cancelarItem');
+Route::get('/cuenta/{id_usuario}','ctrlMenu@verCuenta')->middleware('autenticado')->name('datosCuenta');
+Route::get('/cuentaModificar/{id_usuario}','ctrlMenu@verCuentaModificar')->middleware('autenticado')->name('datosCuentaModificar');
+Route::get('/cuentaCambiarPass/{id_usuario}','ctrlMenu@verCuentaCambiarPass')->middleware('autenticado')->name('datosCuentaCambiarPass');
+Route::get('/cuentaEliminar/{id_usuario}','ctrlMenu@verCuentaEliminar')->middleware('autenticado')->name('datosCuentaEliminar');
+Route::post('/modificar','ctrlUsuario@modificar')->middleware('autenticado')->name('modificarDatos');
+Route::post('/modificarPass','ctrlUsuario@cambiarPass')->middleware('autenticado')->name('modificarPass');
+Route::post('/eliminar','ctrlUsuario@eliminar')->middleware('autenticado')->name('eliminarUsuario');
+Route::get('/pedidos/{id_usuario}','ctrlMenu@verPedidos')->middleware('autenticado')->name('datosPedidos');
+Route::post('/cancelarpedido','ctrlMenu@cancelarPedido')->middleware('autenticado')->name('cancelarPedido');
+Route::post('/cancelaritem','ctrlMenu@cancelarItem')->middleware('autenticado')->name('cancelarItem');
 
 //Rutas Enviar Correo
 Route::post('/correoCustom','ctrlCorreo@correoCustom')->name('correoCustom');
 Route::get('/correoPrueba','ctrlCorreo@correoPrueba')->name('correoPrueba');
 
 //Rutas Comprar
-Route::get('/comprobarCompra','ctrlComprar@comprar')->name('comprobarCompra');
-Route::get('/comprar','ctrlComprar@realizarCompra')->name('comprar');
+Route::get('/comprobarCompra','ctrlComprar@comprar')->middleware('autenticado')->name('comprobarCompra');
+Route::get('/comprar','ctrlComprar@realizarCompra')->middleware('autenticado')->name('comprar');
 
 //Rutas PDF
 Route::get('/pdfPrueba','ctrlPDF@pdfPrueba')->name('pdfPrueba');

@@ -41,25 +41,25 @@ class ctrlMenu extends Controller
     public function verCuenta($id_usuario){
         return view('cuerpoCuenta',
             $this -> obtenerCategorias(),
-            ['usuario' => Usuarios::where('usuario_id', $id_usuario)->get()]);
+            ['usuario' => Usuarios::where(session('usuarioid'))->get()]);
     }
 
     public function verCuentaModificar($id_usuario){
         return view('cuerpoCuentaModificar',
             $this -> obtenerCategorias(),
-            ['usuario' => Usuarios::where('usuario_id', $id_usuario)->get()]);
+            ['usuario' => Usuarios::where(session('usuarioid'))->get()]);
     }
 
     public function verCuentaEliminar($id_usuario){
         return view('cuerpoCuentaEliminar',
             $this -> obtenerCategorias(),
-            ['usuario' => Usuarios::where('usuario_id', $id_usuario)->get()]);
+            ['usuario' => Usuarios::where(session('usuarioid'))->get()]);
     }
     
     public function verCuentaCambiarPass($id_usuario){
         return view('cuerpoCuentaCambiarPass',
             $this -> obtenerCategorias(),
-            ['usuario' => Usuarios::where('usuario_id', $id_usuario)->get()]);
+            ['usuario' => Usuarios::where(session('usuarioid'))->get()]);
     }
 
     public function verPedidos($id_usuario){
