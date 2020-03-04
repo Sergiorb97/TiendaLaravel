@@ -17,7 +17,7 @@ class ComprobarAutenticacion
     public function handle($request, Closure $next)
     {
         if (!session()->has('user') || !session()->has('usuarioid')) {
-            return redirect()->route('inicio');
+            return redirect()->route('inicio')->with('fail','Debes iniciar sesión');
         }
 
         return $next($request);

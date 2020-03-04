@@ -21,5 +21,10 @@ class AccederInfoProductoTest extends TestCase
         $carrito = $this->get(route('carrito'));
         $carrito->assertStatus(200);
 
+        $modificar = $this->get(route('modificarDatos'));
+        $modificar->assertStatus(405);
+
+        $comprar = $this->get(route('cancelarPedido'));
+        $comprar->assertStatus(405);
     }
 }

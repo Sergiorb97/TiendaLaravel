@@ -5,7 +5,7 @@
         <div name="inicio" id="oculto" class="col-2 show sidebar text-white px-0">
             <ul class="col-2 nav flex-column flex-nowrap text-truncate navbar-dark bg-dark position-fixed pt-2 vh-100" id="sidebar">
                 <li class="nav-item">
-                    <h2 class="col-2 mt-5 pt-2">Categorías</h2>
+                    <h2 class="col-2 mt-5 pt-5">Categorías</h2>
                     @foreach($categorias as $categoria)
                     <a class="nav-link" href="{{ route('opcCategoria',$categoria -> categoria_id) }}">{{$categoria -> nombre}}</a>
                     @endforeach
@@ -22,9 +22,9 @@
             </div>
             <div class='card-deck col mx-auto'>
                 @foreach($destacados as $destacado)
-                <div class="row card text-center w-25 h-25">
+                <div class="row card text-center" style="min-height:500px;max-height:700px;">
                     <!--w-530 h-530 -->
-                    <img class="card-img-top " src="Assets/img/{{$destacado -> imagen}}" alt="Card image cap">
+                    <img class="card-img-top"  src="Assets/img/{{$destacado -> imagen}}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{$destacado -> nombre}}</h5>
                         <p>{{$destacado -> descripcion}}</p>
@@ -43,7 +43,7 @@
             </div>
             <div class='card-deck'>
                 @foreach($productos as $producto)
-                <div class="d-flex row flex-wrap mx-auto w-25 h-25">
+                <div class="d-flex row flex-wrap mx-auto w-25 h-25" style="min-height:550px;max-height:700px;">
                     <div class="row card text-center mb-3">
                         <!--w-530 h-530 -->
                         <img class="card-img-top img-fluid" src="Assets/img/{{$producto -> imagen}}" alt="Card image cap">
@@ -61,7 +61,7 @@
                 @endforeach
                 <!-- Muestra de resto de productos-->
             </div>
-            <div class="aling-self-center">
+            <div class="position-absolute" style="left:45%;">
                 {{ $productos->links() }}
                 <!-- Paginacion -->
             </div>

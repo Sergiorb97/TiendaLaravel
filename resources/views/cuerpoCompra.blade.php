@@ -5,7 +5,7 @@
         <div name="inicio" id="oculto" class="col-2 show sidebar text-white px-0">
             <ul class="col-2 nav flex-column flex-nowrap text-truncate navbar-dark bg-dark position-fixed pt-2 vh-100" id="sidebar">
                 <li class="nav-item">
-                    <h2 class="col-2 mt-5 pt-2">Categorías</h2>
+                    <h2 class="col-2 mt-5 pt-5">Categorías</h2>
                     @foreach($categorias as $categoria)
                     <a class="nav-link" href="{{ route('opcCategoria',$categoria -> categoria_id) }}">{{$categoria -> nombre}}</a>
                     @endforeach
@@ -22,23 +22,25 @@
             </div>
             @if(Cart::isEmpty() == 0)
             <div class="row">
-                <div class="col-6">
-                    <div class="bg-light text-center">
-                        <h2>Dirección de entrega</h2>
-                        <p>{{session('user')}}</p>
-                        <p>Dirección: {{session('direccion')}}</p>
-                        <p>Correo: {{session('correo')}}</p>
-                        <p>Teléfono: {{session('telefono')}}</p>
-                        <p>Nº Tarjeta: 
-                            @if(!empty(session('tarjeta')))
+                <div class="col-4">
+                    <div class="bg-light p-4">
+                        <h4>Datos de usuario</h4>
+                        <ul>
+                            <li>Usuario: {{session('user')}}</li>
+                            <li>Dirección: {{session('direccion')}}</li>
+                            <li>Correo: {{session('correo')}}</li>
+                            <li>Teléfono: {{session('telefono')}}</li>
+                            <li>Nº Tarjeta:
+                                @if(!empty(session('tarjeta')))
                                 {{session('tarjeta')}}
-                            @else
+                                @else
                                 <input type="text" name="numtarjeta" id="numtarjeta"> <button class="btn btn-success">Confirmar</button>
-                            @endif
-                        </p>
+                                @endif
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-6 text-center">
+                <div class="col-8 text-center">
                     <table class="table">
                         <thead class="bg-light">
                             <tr>
@@ -82,7 +84,9 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a href="{{route('comprar')}}" class="btn btn-success border">Realizar compra</a>
+                    <div class="text-center">
+                        <a href="{{route('comprar')}}" class="btn btn-success border">Confirmar compra</a>
+                    </div>
                 </div>
             </div>
             <div class="text-center mb-5">

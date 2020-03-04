@@ -32,7 +32,7 @@ class ctrlMenu extends Controller
     public function mostrarPortada(){
         //return view('inicio',['categorias' => Categorias::where('categoria_id','1') -> get()]);
         //return view('portada',['categorias' => Categorias::all()]);
-        
+        //--$this -> getREST();
         return view('cuerpoDestacados',
             $this -> obtenerCategorias(),
             $this -> obtenerProductos());
@@ -82,5 +82,12 @@ class ctrlMenu extends Controller
     public function cerrarSesion(){
         session()->flush();
         return redirect()->route('inicio');
+    }
+
+    public function getREST(){
+        $client = new \GuzzleHttp\Client();
+        $ip = Request::ip();
+        $response = $client->request('GET', 'http://ip-api.com/json/'.$ip.'?fields=country,countryCode,region,regionName,city');
+        session(['rest' => $response->body()]); // '{"id": 1420053, "name": "guzzle", ...}';
     }
 }

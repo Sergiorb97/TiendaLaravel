@@ -18,14 +18,14 @@
   <header>
     @csrf
     <div class="container-fluid fixed-top bg-dark py-3">
-      <a id="inicio" href="{{ route('inicio') }}" role="button" class="float-left">Inicio</a>
+      <h2><a id="inicio" href="{{ route('inicio') }}" role="button" style="z-index:1500;text-decoration: none;" class="float-left position-absolute ml-5">InfoZone</a></h2>
       <div class="row">
         <div class="col-sm-2 show sidebar">
           <!-- spacer col -->
         </div>
         <div class="col px-3">
           <!-- toggler -->
-          <a id="hamburguer" href="#" role="button btn-link">
+          <a id="hamburguer" class="ml-4n" href="#" role="button btn-link">
             <i class="fa fa-bars fa-lg fa-2x"></i>
           </a>
           <div class="float-right">
@@ -46,11 +46,13 @@
               <i class="fas fa-user fa-2x"></i>
             </a>
             @endif
-            <a id="shopping-cart" href="{{ route('verCarrito') }}" role="button">
+            <a id="shopping-cart" href="{{ route('verCarrito') }}" class="mr-4" role="button">
               <i class="fas fa-shopping-cart fa-2x">
               </i>
-              <span class="badge">{{ Cart::getTotalQuantity() }}</span>
             </a>
+            <div style="right:43px;top:-15px;" class="position-absolute">
+              <span class="badge badge-pill badge-light">{{ Cart::getTotalQuantity() }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -58,17 +60,25 @@
   </header>
 
   @if(session('success'))
-  <div style="z-index:1500;" class="position-absolute alert alert-success">{{ session('success') }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+  <div style="z-index:1500;right:5%;bottom:5%;" class="position-fixed alert alert-success">
+    <button type="button" style="top:5%;right:5%;" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    <h4 class="alert-heading">¡Bien hecho!</h4>
+    <span>
+      {{ session('success') }}&nbsp&nbsp&nbsp&nbsp&nbsp
+    </span>
   </div>
   @endif
   @if(session('fail'))
-  <div style="z-index:1500;" class="position-absolute alert alert-danger">{{ session('fail') }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <div style="z-index:1500;right:5%;bottom:5%;" class="position-fixed alert alert-danger">
+    <button type="button" style="top:5%;right:5%;" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
+    <h4 class="alert-heading">¡Vaya, ha ocurrido un error!</h4>
+    <span>
+      {{ session('fail') }}&nbsp&nbsp&nbsp&nbsp&nbsp
+    </span>
   </div>
   @endif
 
@@ -95,7 +105,7 @@
             <form method="POST" action="{{ route('login') }}" class="form-signin">
               @csrf
               <div class="text-center">
-                <input type="text" name="usuarioLogin" class="form-control my-3" placeholder="Usuario/Email *" value="{{ old('usuarioLogin') }}">
+                <input type="text" name="usuarioLogin" class="form-control my-3" placeholder="Usuario *" value="{{ old('usuarioLogin') }}">
                 @if($errors->has('usuarioLogin'))
                 <div class="alert alert-danger">{{ $errors->first('usuarioLogin') }}</div>
                 @endif

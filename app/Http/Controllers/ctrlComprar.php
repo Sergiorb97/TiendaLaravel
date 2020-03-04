@@ -25,7 +25,7 @@ class ctrlComprar extends Controller
                 $ok++;
             }
         }
-        if ($ok == $productos && session()->has('user')) {
+        if ($ok == $productos) {
             return true;
         } else {
             return false;
@@ -38,7 +38,7 @@ class ctrlComprar extends Controller
             $carrito = Cart::getContent();
             return view('cuerpoCompra', compact('carrito'), ['categorias' => Categorias::all()]);
         } else {
-            return back()->with('error', 'Error');
+            return back()->with('fail', 'El producto está agotado');
         }
     }
 
